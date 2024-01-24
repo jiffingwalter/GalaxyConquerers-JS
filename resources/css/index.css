@@ -1,0 +1,16 @@
+body{
+    display: grid;
+    background-color: grey;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+game-window{
+    display: flex;
+    background-color: black;
+    width: 720px;
+    height: 720px;
+    justify-self: center;
+    align-self: center;
+}
