@@ -22,4 +22,5 @@ function createObject(object,x,y){
 function getObject(id){
     return null;
 }
+
 // delete an object

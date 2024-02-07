@@ -1,11 +1,11 @@
 // Topmost game object
-export class Generic{
+export class objectGeneric{
     id = "";
     sprite = "";
     element = null;
 
     constructor(){
-        this.id = typeof(this) + genID();
+        this.id = typeof(this) + this.genID();
     }
 
     /** 
@@ -23,7 +23,7 @@ export class Generic{
         this.sprite = sprite;
     }
     get sprite(){
-        return this._sprite;
+        return this.sprite;
     }
 
     /**
@@ -32,5 +32,8 @@ export class Generic{
      */
     bindElement(){
         this.element = document.getElementById(this.id);
+    }
+    get element(){
+        return this.element;
     }
 }
