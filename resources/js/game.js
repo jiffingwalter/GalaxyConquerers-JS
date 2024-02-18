@@ -1,7 +1,8 @@
+import { PrimeEngine } from "./PrimeEngine/PrimeEngine";
+let pe = new PrimeEngine();
+
 // Parent game script
 // Will handle game initilization, game events, score related functions
-import "./objectHandler.js";
-import { PrimeUtils } from "./utility/utilities.js";
 
 let gamePaused = false;
 
@@ -11,7 +12,7 @@ let gamePaused = false;
 function controlsEventListener(){
     document.addEventListener("keydown", event=>{
         
-        PrimeUtils.debugPrint(event);
+        pe.debugPrint(event);
 
         if (event.key.startsWith("Arrow") && !gamePaused){
             event.preventDefault();
@@ -25,4 +26,11 @@ function controlsEventListener(){
             }
         }
     });
+}
+
+/**
+ * Creates player object and initalizes player controls
+ */
+function createPlayer(){
+    pe.createObject(new Player,50,50);
 }

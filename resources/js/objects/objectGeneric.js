@@ -30,10 +30,26 @@ export class objectGeneric{
      * Assigns game object element variable to it's respective HTML element
      * @returns HTMLElement
      */
-    bindElement(){
-        this.element = document.getElementById(this.id);
+    bindElement(elementID){
+        this.element = document.getElementById(elementID);
+        return this.element;
     }
     get element(){
         return this.element;
     }
+    setElementX(x){
+        this.element.style.left = `{x}px`;
+    }
+    setElementY(y){
+        this.element.style.top = `{y}px`;
+    }
+    getElementCoords(){
+        return{
+            'x':this.element.style.left,
+            'y':this.element.style.top
+        };
+    }
+
+    // positioning and movement
+    
 }
