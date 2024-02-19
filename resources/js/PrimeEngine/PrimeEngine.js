@@ -59,7 +59,7 @@ export class PrimeEngine{
      * @returns newly created player object
      */
     createPlayer(){
-        let newPlayer = this.createObject(new Player,0,0);
+        let newPlayer = this.createObject(new Player,400,800);
         return newPlayer;
     }
 
@@ -75,5 +75,22 @@ export class PrimeEngine{
                 this.debugPrint(`${element} = ${objectValues[index]}`);
             });
         }
+    }
+
+    // GAME WINDOW FUNCTIONS -------------------------------------------------------------------------------------
+    /**
+     * Tests if a coordinate is outside the game window
+     * @param {Number} coord - A coordinate to test
+     * @param {Number} gridBuffer - Optional, a buffer number for game objects with offset origins. Adds this number to the check of coordinates
+     * beyond the window size
+     * @returns boolean
+     */
+    isCoordinateOffScreen(coord,gridBuffer = 0){
+        let screen = {
+            'width':gameWindow.clientWidth,
+            'height':gameWindow.clientHeight
+        }
+        // is the coordinate outside the game window width and/or height?
+        return (coord < 0 || coord + gridBuffer > screen.width) && (coord < 0 || coord + gridBuffer > screen.height);
     }
 }

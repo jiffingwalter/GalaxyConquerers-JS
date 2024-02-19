@@ -5,4 +5,16 @@ export class objectNonstatic extends objectGeneric{
     constructor(){
         super();
     }
+
+    // ATTRIBUTES
+    set hp(num){
+        this._hp = num;
+    }
+    get hp(){
+        return this._hp;
+    }
+
+    // FLAGS
+
+    // MOVEMENT
 }

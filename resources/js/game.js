@@ -22,17 +22,33 @@ function initalizeGame(){
      */
     function createControlsEventListener(){
         document.addEventListener("keydown", event=>{
+            /* Player directional controls */
             if (event.key.startsWith("Arrow") && !gamePaused){
                 event.preventDefault();
-                switch(event.key){
-                    case "ArrowLeft":
-                        player.x -= player.speed;
-                        break;
-                    case "ArrowRight":
-                        player.x += player.speed;
-                        break;
+                if(player.allowHorizontalMovement){
+                    switch(event.key){
+                        case "ArrowLeft":
+                            player.x -= player.speed;
+                            break;
+                        case "ArrowRight":
+                            player.x += player.speed;
+                            break;
+                    }
+                }
+                if(player.allowVerticalMovement){
+                    switch(event.key){
+                        case "ArrowUp":
+                            player.y -= player.speed;
+                            break;
+                        case "ArrowDown":
+                            player.y += player.speed;
+                            break;
+                    }
                 }
             }
+            /* Menu controls */
+            // menu controls go here!
+
         });
     }
 }
