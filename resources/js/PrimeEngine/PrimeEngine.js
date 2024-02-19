@@ -77,7 +77,7 @@ export class PrimeEngine{
         }
     }
 
-    // GAME WINDOW FUNCTIONS -------------------------------------------------------------------------------------
+    //  FUNCTIONS -------------------------------------------------------------------------------------
     /**
      * Tests if a coordinate is outside the game window
      * @param {Number} coord - A coordinate to test
