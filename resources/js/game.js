@@ -32,7 +32,6 @@ function initalizeGame(){
                         player.x += player.speed;
                         break;
                 }
-                console.log(player.getElementPosition());
             }
         });
     }

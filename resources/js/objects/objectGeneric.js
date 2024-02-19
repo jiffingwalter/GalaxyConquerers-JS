@@ -1,21 +1,21 @@
 // Topmost game object
 export class objectGeneric{
     // technical values
-    id = String;
-    sprite = String;
-    element = HTMLObjectElement;
-    class = String;
-    x = Number;
-    y = Number;
-    r = Number; // rotation
+    _id = String;
+    _sprite = String;
+    _element = HTMLObjectElement;
+    _class = String;
+    _x = Number;
+    _y = Number;
+    _r = Number; // rotation
 
     // attribute values
-    speed = Number;
-    allowVerticalMovement = Boolean;
-    allowHorizontalMovement = Boolean;
+    _speed = Number;
+    _allowVerticalMovement = Boolean;
+    _allowHorizontalMovement = Boolean;
 
     constructor(){
-        this.id = typeof(this) + this.genID();
+        this._id = typeof(this) + this.genID();
     }
 
     // GENERIC ----------------------------------------------------------------------------
@@ -27,14 +27,14 @@ export class objectGeneric{
         return Math.floor(Math.random() * 9999999999);
     }
     get id(){
-        return this.id;
+        return this._id;
     }
 
     set sprite(sprite){
-        this.sprite = sprite;
+        this._sprite = sprite;
     }
     get sprite(){
-        return this.sprite;
+        return this._sprite;
     }
 
     // ELEMENT HANDLING ----------------------------------------------------------------------------
@@ -43,34 +43,34 @@ export class objectGeneric{
      * @returns HTMLElement
      */
     bindElement(htmlElement){
-        this.element = htmlElement;
-        return this.element;
+        this._element = htmlElement;
+        return this._element;
     }
     get element(){
-        return this.element;
+        return this._element;
     }
     /** Returns an object's element coordinates and rotation */ 
     getElementPosition(){ 
         return{
-            'x':this.element.style.left,
-            'y':this.element.style.top,
-            'r':this.r
+            'x':this._element.style.left,
+            'y':this._element.style.top,
+            'r':this._r
         };
     }
     // POSITIONING AND MOVEMENT ----------------------------------------------------------------------------
     get x(){
-        return this.x;
+        return this._x;
     }
     set x(x){
         this.element.style.left = `${x}px`;
-        this.x = x;
+        this._x = x;
     }
     get y(){
-        return this.y;
+        return this._y;
     }
     set y(y){
         this.element.style.top = `${y}px`;
-        this.y = y;
+        this._y = y;
     }
 
     // DEBUG ------------------------------------------------------------------------------------------------

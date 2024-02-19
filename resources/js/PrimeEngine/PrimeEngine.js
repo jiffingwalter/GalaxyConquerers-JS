@@ -59,7 +59,7 @@ export class PrimeEngine{
      * @returns newly created player object
      */
     createPlayer(){
-        let newPlayer = this.createObject(new Player,100,100);
+        let newPlayer = this.createObject(new Player,0,0);
         return newPlayer;
     }
 
