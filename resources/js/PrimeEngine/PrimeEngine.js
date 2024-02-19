@@ -1,4 +1,5 @@
-import { globals } from "./globals.js";
+import { globals, gameWindow } from "./globals.js";
+import { Player } from "../objects/nonstatic/Player.js"
 
 // core Primordial Engine functionality
 export class PrimeEngine{
@@ -9,7 +10,7 @@ export class PrimeEngine{
      */
     debugPrint(input){
         if (globals.debug){
-            console.log(input);
+            console.log('DEBUG: ' + input);
         }
     }
 
@@ -20,20 +21,23 @@ export class PrimeEngine{
      * @param {objectGeneric} object type of game object
      * @param {number} x coordinate
      * @param {number} y coordinate
-     * @return New object's unique ID
+     * @return Newly created object
      */
     createObject(object,x,y){
         let newElement = document.createElement('object');
-        newElement.ID = object.id;
+        newElement.id = object.id;
+        object.bindElement(newElement);
+        gameWindow.append(newElement);
+        object.x = x;
+        object.y = y;
+        object.r = 0;
         
-        object.bindElement(newElement.ID);
-        
-        return object.id;
+        return object;
     }
 
     /**
-     * Returns a game object
-     * @param {string} id 
+     * Returns a game object from global object list
+     * @param {string} id of object to query for
      * @returns Game object
      */
     getObject(id){
@@ -41,5 +45,35 @@ export class PrimeEngine{
         return null;
     }
 
-    // delete an object
+    /**
+     * Deletes a game object
+     * @param {string} id of object to delete
+     * @returns boolean if successful
+     */
+    deleteObject(id){
+        return null;
+    }
+
+    /**
+     * Creates a new player object
+     * @returns newly created player object
+     */
+    createPlayer(){
+        let newPlayer = this.createObject(new Player,100,100);
+        return newPlayer;
+    }
+
+    /**
+     * Prints a dump of all of an object's keys and values to the debug console
+     */
+    debugDumpObject(object){
+        if (globals.debug){
+            let objectKeys = Object.keys(object);
+            let objectValues = Object.values(object);
+
+            objectKeys.map((element,index)=>{
+                this.debugPrint(`${element} = ${objectValues[index]}`);
+            });
+        }
+    }
 }

@@ -1,36 +1,39 @@
-import { PrimeEngine } from "./PrimeEngine/PrimeEngine";
+import { PrimeEngine } from "./PrimeEngine/PrimeEngine.js";
 let pe = new PrimeEngine();
 
 // Parent game script
 // Will handle game initilization, game events, score related functions
 
 let gamePaused = false;
+initalizeGame();
 
-/**
- * Creates and controls player controls/interaction
- */
-function controlsEventListener(){
-    document.addEventListener("keydown", event=>{
-        
-        pe.debugPrint(event);
+function initalizeGame(){
+    pe.debugPrint('initalizing game...');
 
-        if (event.key.startsWith("Arrow") && !gamePaused){
-            event.preventDefault();
-            switch(event.key){
-                case "ArrowLeft":
-                    x -= moveAmount;
-                    break;
-                case "ArrowRight":
-                    x += moveAmount;
-                    break;
+    // create player object and initalize controls
+    let player = pe.createPlayer();
+    pe.debugDumpObject(player);
+    createControlsEventListener();
+
+
+    // FUNCTIONS --------------------------------------------------------------------------------------
+    /**
+     * Creates and controls player controls/interaction
+     */
+    function createControlsEventListener(){
+        document.addEventListener("keydown", event=>{
+            if (event.key.startsWith("Arrow") && !gamePaused){
+                event.preventDefault();
+                switch(event.key){
+                    case "ArrowLeft":
+                        player.x -= player.speed;
+                        break;
+                    case "ArrowRight":
+                        player.x += player.speed;
+                        break;
+                }
+                console.log(player.getElementPosition());
             }
-        }
-    });
-}
-
-/**
- * Creates player object and initalizes player controls
- */
-function createPlayer(){
-    pe.createObject(new Player,50,50);
+        });
+    }
 }
