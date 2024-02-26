@@ -1,16 +1,30 @@
 import { globals, gameWindow } from "./globals.js";
-import { Player } from "../objects/nonstatic/Player.js"
 
 // core Primordial Engine functionality
 export class PrimeEngine{
-    // GENERAL ---------------------------------------------------------------------------------------------------------------------
-    /**
-     * Takes any input, checks if debug is currently enabled and prints contents to console if so
-     * @param {*} input 
-     */
-    debugPrint(input){
-        if (globals.debug){
-            console.log('DEBUG: ' + input);
+    // DEBUG ---------------------------------------------------------------------------------------------------------------------
+    debug = {
+        /**
+         * Takes any input, checks if debug is currently enabled and prints contents to console if so
+         * @param {*} input 
+         */
+        print(input){
+            if (globals.debug){
+                console.log('DEBUG: ' + input);
+            }
+        },
+        /**
+         * Prints a dump of all of an object's keys and values to the debug console
+         */
+        dumpObject(object){
+            if (globals.debug){
+                let objectKeys = Object.keys(object);
+                let objectValues = Object.values(object);
+    
+                objectKeys.map((element,index)=>{
+                    this.print(`${element} = ${objectValues[index]}`);
+                });
+            }
         }
     }
 
@@ -63,21 +77,7 @@ export class PrimeEngine{
         return newPlayer;
     }
 
-    /**
-     * Prints a dump of all of an object's keys and values to the debug console
-     */
-    debugDumpObject(object){
-        if (globals.debug){
-            let objectKeys = Object.keys(object);
-            let objectValues = Object.values(object);
-
-            objectKeys.map((element,index)=>{
-                this.debugPrint(`${element} = ${objectValues[index]}`);
-            });
-        }
-    }
-
-    //  FUNCTIONS -------------------------------------------------------------------------------------
+    // GENERAL -------------------------------------------------------------------------------------
     /**
      * Tests if a coordinate is outside the game window
      * @param {Number} coord - A coordinate to test

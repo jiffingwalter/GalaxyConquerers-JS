@@ -1,4 +1,5 @@
 import { PrimeEngine } from "./PrimeEngine/PrimeEngine.js";
+import { Player } from "./objects/nonstatic/Player.js"
 let pe = new PrimeEngine();
 
 // Parent game script
@@ -8,15 +9,23 @@ let gamePaused = false;
 initalizeGame();
 
 function initalizeGame(){
-    pe.debugPrint('initalizing game...');
+    pe.debug.print('initalizing game...');
 
     // create player object and initalize controls
-    let player = pe.createPlayer();
-    pe.debugDumpObject(player);
+    let player = createPlayer();
+    pe.debug.dumpObject(player);
     createControlsEventListener();
 
-
     // FUNCTIONS --------------------------------------------------------------------------------------
+    /**
+     * Creates a new player object
+     * @returns newly created player object
+     */
+    function createPlayer(){
+        let newPlayer = pe.createObject(new Player,400,800);
+        return newPlayer;
+    }
+    
     /**
      * Creates and controls player controls/interaction
      */

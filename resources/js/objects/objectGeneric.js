@@ -1,4 +1,6 @@
-import { globals, gameWindow } from "../PrimeEngine/globals.js";
+import { PrimeEngine } from "../PrimeEngine/PrimeEngine.js";
+let pe = new PrimeEngine();
+
 // Topmost game object
 export class objectGeneric{
     // technical values
@@ -75,7 +77,7 @@ export class objectGeneric{
     }
     set x(x){
         // if restrictToScreen flag is true and the new coordinate is outside the window, return and do not allow the coordinate update
-        if (this.restrictToScreen && this._isCoordinateOffScreen(x,this.element.clientWidth)){
+        if (this.restrictToScreen && pe.isCoordinateOffScreen(x,this.element.clientWidth)){
             return false;
         }
         this.element.style.left = `${x}px`;
@@ -87,7 +89,7 @@ export class objectGeneric{
     }
     set y(y){
         // if restrictToScreen flag is true and the new coordinate is outside the window, return and do not allow the coordinate update
-        if (this.restrictToScreen && this._isCoordinateOffScreen(y,this.element.clientHeight)){
+        if (this.restrictToScreen && pe.isCoordinateOffScreen(y,this.element.clientHeight)){
             return false;
         }
         this.element.style.top = `${y}px`;
@@ -129,19 +131,5 @@ export class objectGeneric{
 
     // FUNCTIONS -------------------------------------------------------------------------------------------------
     // general functions area - likely flag implementations
-    /**
-     * Tests if a coordinate is outside the game window
-     * @param {Number} coord - A coordinate to test
-     * @param {Number} gridBuffer - Optional, a buffer number for game objects with offset origins. Adds this number to the check of coordinates
-     * beyond the window size
-     * @returns boolean
-     */
-    _isCoordinateOffScreen(coord,gridBuffer = 0){
-        let screen = {
-            'width':gameWindow.clientWidth,
-            'height':gameWindow.clientHeight
-        }
-        // is the coordinate outside the game window width and/or height?
-        return (coord < 0 || coord + gridBuffer > screen.width) && (coord < 0 || coord + gridBuffer > screen.height);
-    }
+    
 }
