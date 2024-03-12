@@ -6,6 +6,6 @@ export class Player extends objectNonstatic{
         this.hp = 100;
         this.speed = 50;
         this.allowHorizontalMovement = true;
-        this.allowVerticalMovement = true;
+        this.allowVerticalMovement = false;
     }
 }

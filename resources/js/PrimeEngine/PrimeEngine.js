@@ -1,7 +1,9 @@
-import { globals, gameWindow } from "./globals.js";
+import { globals } from "./globals.js";
 
 // core Primordial Engine functionality
 export class PrimeEngine{
+    gameWindow = document.getElementsByTagName('game-window')[0];
+
     // DEBUG ---------------------------------------------------------------------------------------------------------------------
     debug = {
         /**
@@ -41,7 +43,7 @@ export class PrimeEngine{
         let newElement = document.createElement('object');
         newElement.id = object.id;
         object.bindElement(newElement);
-        gameWindow.append(newElement);
+        this.gameWindow.append(newElement);
         object.x = x;
         object.y = y;
         object.r = 0;
@@ -87,8 +89,8 @@ export class PrimeEngine{
      */
     isCoordinateOffScreen(coord,gridBuffer = 0){
         let screen = {
-            'width':gameWindow.clientWidth,
-            'height':gameWindow.clientHeight
+            'width':this.gameWindow.clientWidth,
+            'height':this.gameWindow.clientHeight
         }
         // is the coordinate outside the game window width and/or height?
         return (coord < 0 || coord + gridBuffer > screen.width) && (coord < 0 || coord + gridBuffer > screen.height);
