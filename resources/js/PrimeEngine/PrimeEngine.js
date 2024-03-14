@@ -1,8 +1,9 @@
 import { globals } from "./globals.js";
-import { GameWindowController } from "./GameWindowController.js";
+import { GameWindowController } from "./controllers/GameWindowController.js";
+import { ObjectController } from "./controllers/ObjectController.js";
 
 // core Primordial Engine functionality
-export class PrimeEngineController{
+export class PrimeEngineCore{
     gwc = new GameWindowController;
     gameWindow = this.gwc.getWindowNode();
 
@@ -98,4 +99,4 @@ export class PrimeEngineController{
         return (coord < 0 || coord + gridBuffer > screen.width) && (coord < 0 || coord + gridBuffer > screen.height);
     }
 }
-export let PrimeEngine = new PrimeEngineController();
+export let PrimeEngine = new PrimeEngineCore();
