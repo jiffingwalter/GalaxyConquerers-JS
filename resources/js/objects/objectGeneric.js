@@ -1,5 +1,4 @@
-import { PrimeEngine } from "../PrimeEngine/PrimeEngine.js";
-let pe = new PrimeEngine();
+import { PrimeEngine as pe } from "../PrimeEngine/PrimeEngine.js";
 
 // Topmost game object
 export class objectGeneric{

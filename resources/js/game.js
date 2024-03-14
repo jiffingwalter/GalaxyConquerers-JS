@@ -1,7 +1,7 @@
-import { PrimeEngine } from "./PrimeEngine/PrimeEngine.js";
+import { PrimeEngine as pe } from "./PrimeEngine/PrimeEngine.js";
 import { globals } from "./PrimeEngine/globals.js";
 import { Player } from "./objects/nonstatic/Player.js"
-let pe = new PrimeEngine();
+
 
 // Parent game script
 // Will handle game initilization, game events, score related functions
@@ -11,11 +11,11 @@ initalizeGame();
 
 function initalizeGame(){
     pe.debug.print('initalizing game...');
-    globals.gameState = "running"
+    globals.gameState = "running";
 
     // create player object and initalize controls
     let player = createPlayer();
-    pe.debug.dumpObject(player);
+    //pe.debug.dumpObject(player);
     createControlsEventListener();
 
     // FUNCTIONS --------------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ function initalizeGame(){
     function createControlsEventListener(){
         document.addEventListener("keydown", event=>{
             /* Player directional controls */
-            if (event.key.startsWith("Arrow") && globals.gameState != "running"){
+            if (event.key.startsWith("Arrow") && globals.gameState == "running"){
                 event.preventDefault();
                 if(player.allowHorizontalMovement){
                     switch(event.key){
