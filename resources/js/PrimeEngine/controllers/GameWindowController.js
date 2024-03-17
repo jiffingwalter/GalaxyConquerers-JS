@@ -1,5 +1,5 @@
 // class for controlling the game window as needed
-export class GameWindowController{
+export class GameWindowControllerClass{
     constructor(){
         let element = document.createElement('game-window');
         document.body.appendChild(element);
@@ -9,3 +9,4 @@ export class GameWindowController{
         return this.windowElement;
     }
 }
+export let GameWindowController = new GameWindowControllerClass;

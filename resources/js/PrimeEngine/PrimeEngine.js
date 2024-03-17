@@ -1,11 +1,10 @@
 import { globals } from "./globals.js";
-import { GameWindowController } from "./controllers/GameWindowController.js";
+import { GameWindowController as gwc } from "./controllers/GameWindowController.js";
 import { ObjectController } from "./controllers/ObjectController.js";
 
 // core Primordial Engine functionality
 export class PrimeEngineCore{
-    gwc = new GameWindowController;
-    gameWindow = this.gwc.getWindowNode();
+    gameWindow = gwc.getWindowNode();
 
     // DEBUG ---------------------------------------------------------------------------------------------------------------------
     debug = {
@@ -50,6 +49,8 @@ export class PrimeEngineCore{
         object.x = x;
         object.y = y;
         object.r = 0;
+
+        ObjectController.add(object);
         
         return object;
     }
