@@ -17,9 +17,7 @@ export class PrimeEngineCore{
                 console.log('DEBUG: ' + input);
             }
         },
-        /**
-         * Prints a dump of all of an object's keys and values to the debug console
-         */
+        /** Prints a dump of all of an object's keys and values to the debug console */
         dumpObject(object){
             if (globals.debug){
                 let objectKeys = Object.keys(object);

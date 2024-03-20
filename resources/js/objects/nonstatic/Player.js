@@ -1,5 +1,5 @@
-import { objectNonstatic } from './objectNonstatic.js';
-export class Player extends objectNonstatic{
+import { ObjectNonstatic } from './ObjectNonstatic.js';
+export class Player extends ObjectNonstatic{
 
     constructor(){
         super();

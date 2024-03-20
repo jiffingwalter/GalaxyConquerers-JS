@@ -1,6 +1,6 @@
 import { PrimeEngine as pe } from "./PrimeEngine/PrimeEngine.js";
 import { globals } from "./PrimeEngine/globals.js";
-import { Player } from "./objects/nonstatic/Player.js"
+import { Player } from "./objects/nonstatic/Player.js";
 
 
 // Parent game script
