@@ -1,4 +1,4 @@
-import { ObjectNonstatic } from './ObjectNonstatic.js';
+import { ObjectNonstatic } from '../ObjectNonstatic.js';
 export class Player extends ObjectNonstatic{
 
     constructor(){
@@ -8,4 +8,5 @@ export class Player extends ObjectNonstatic{
         this.allowHorizontalMovement = true;
         this.allowVerticalMovement = false;
     }
+    
 }

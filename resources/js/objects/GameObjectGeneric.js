@@ -1,7 +1,7 @@
 import { PrimeEngine as pe } from "../PrimeEngine/PrimeEngine.js";
 
 // Topmost game object
-export class ObjectGeneric{
+export class GameObjectGeneric{
     // technical values
     _id = String;
     _sprite = String;

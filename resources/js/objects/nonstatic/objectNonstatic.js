@@ -1,6 +1,6 @@
 // nonstatic object generic - parent of objects that might have interactivitiy, eg. health, collision, response to different events
-import { ObjectGeneric } from "../ObjectGeneric.js"
-export class ObjectNonstatic extends ObjectGeneric{
+import { GameObjectGeneric } from "../GameObjectGeneric.js"
+export class ObjectNonstatic extends GameObjectGeneric{
     _hp = Number;
     constructor(){
         super();
