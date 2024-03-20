@@ -1,10 +1,10 @@
 import { globals } from "./globals.js";
-import { GameWindowController as gwc } from "./controllers/GameWindowController.js";
+import { GameWindowController } from "./controllers/GameWindowController.js";
 import { ObjectController } from "./controllers/ObjectController.js";
 
 // core Primordial Engine functionality
 export class PrimeEngineCore{
-    gameWindow = gwc.getWindowNode();
+    gameWindow = GameWindowController.getWindowNode();
 
     // DEBUG ---------------------------------------------------------------------------------------------------------------------
     debug = {
@@ -61,8 +61,7 @@ export class PrimeEngineCore{
      * @returns Game object
      */
     getObject(id){
-        // will need to create a script that puts active game objects in a global list to keep track of them and remove them as needed
-        return null;
+        return ObjectController.get(id);
     }
 
     /**
@@ -71,7 +70,7 @@ export class PrimeEngineCore{
      * @returns boolean if successful
      */
     deleteObject(id){
-        return null;
+        return ObjectController.delete(id);
     }
 
     /**
@@ -83,7 +82,7 @@ export class PrimeEngineCore{
         return newPlayer;
     }
 
-    // GENERAL -------------------------------------------------------------------------------------
+    // UTILITY -------------------------------------------------------------------------------------
     /**
      * Tests if a coordinate is outside the game window
      * @param {Number} coord - A coordinate to test

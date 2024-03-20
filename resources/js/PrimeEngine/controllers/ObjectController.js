@@ -5,11 +5,19 @@ export class ObjectControllerClass{
     get objectList(){
         return this.objectList;
     }
+    /** Adds an object to the global object list */
     add(obj){
-        this.objectList[obj.id] = obj; 
+        this.objectList[obj.id] = obj;
+        return true;
     }
+    /** Gets an object by ID from the global object list */
+    get(objID){
+        return this.objectList[objID];
+    }
+    /** Removes an object by ID from the global object list */
     remove(objID){
         this.objectList.delete(objID);
+        return true;
     }
 }
 export let ObjectController = new ObjectControllerClass;
