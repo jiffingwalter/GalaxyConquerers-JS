@@ -23,6 +23,7 @@ export class ObjectControllerClass{
         this.globalObjectList.delete(objID);
         return true;
     }
+    // Collection of objects that are expected to be used - saves from having to do tons of imports in engine for objects and keeps them all in one spot
     ObjectPallet = {
         generic:{
             GameObjectGeneric:GameObjectGeneric,
@@ -40,4 +41,3 @@ export class ObjectControllerClass{
     };
 }
 export let ObjectController = new ObjectControllerClass;
-// Object Collection - collection of object classes in use to save on imports

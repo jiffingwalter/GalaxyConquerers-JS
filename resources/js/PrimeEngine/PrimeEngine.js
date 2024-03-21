@@ -34,7 +34,7 @@ export class PrimeEngineCore{
     /** 
      * Creates a specified game object in the game world at the given x and y coordinates.
      * Declares HTML elements and respective classes & ID
-     * @param {objectGeneric} object type of game object
+     * @param {GameObjectGeneric} object type of game object
      * @param {number} x coordinate
      * @param {number} y coordinate
      * @return Newly created object
@@ -71,15 +71,6 @@ export class PrimeEngineCore{
         return ObjectController.delete(id);
     }
 
-    /**
-     * Creates a new player object
-     * @returns newly created player object
-     */
-    createPlayer(){
-        let newPlayer = this.createObject(new Player,400,800);
-        return newPlayer;
-    }
-
     // UTILITY -------------------------------------------------------------------------------------
     /**
      * Tests if a coordinate is outside the game window
@@ -97,4 +88,6 @@ export class PrimeEngineCore{
         return (coord < 0 || coord + gridBuffer > screen.width) && (coord < 0 || coord + gridBuffer > screen.height);
     }
 }
+// exports
 export let PrimeEngine = new PrimeEngineCore();
+export let ObjectPallet = ObjectController.ObjectPallet;
