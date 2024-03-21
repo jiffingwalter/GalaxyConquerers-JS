@@ -7,6 +7,7 @@ export class GameObjectGeneric{
     _sprite = String;
     _element = HTMLObjectElement;
     _classes = Array;
+    _origin = Number;
     _x = Number;
     _y = Number;
     _r = Number; // rotation
