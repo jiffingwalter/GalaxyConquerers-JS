@@ -1,5 +1,6 @@
 import { GameObjectGeneric } from "../../objects/GameObjectGeneric.js";
 import { Player } from "../../objects/nonstatic/actors/Player.js";
+import { Enemy } from "../../objects/nonstatic/actors/enemy.js";
 
 
 // OBJECT CONTROLLER - contains the global object list, any active objects in the window will be added to this list
@@ -27,6 +28,7 @@ export class ObjectControllerClass{
     ObjectPallet = {
         generic:{
             GameObjectGeneric:GameObjectGeneric,
+            Enemy:Enemy,
             Player:Player
         },
         actors:{

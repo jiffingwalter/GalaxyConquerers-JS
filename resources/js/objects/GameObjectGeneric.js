@@ -107,6 +107,7 @@ export class GameObjectGeneric{
 
     // FLAGS ------------------------------------------------------------------------------------------------
     // return themselves after setting new values, for logging/debug purposes
+    /** Can this object move horizontally? */
     set allowHorizontalMovement(bool){
         this._allowHorizontalMovement = bool;
         return this._allowHorizontalMovement;
@@ -114,6 +115,7 @@ export class GameObjectGeneric{
     get allowHorizontalMovement(){
         return this._allowHorizontalMovement;
     }
+    /** Can this object move vertically? */
     set allowVerticalMovement(bool){
         this._allowVerticalMovement = bool;
         return this._allowVerticalMovement;
@@ -121,6 +123,7 @@ export class GameObjectGeneric{
     get allowVerticalMovement(){
         return this._allowVerticalMovement;
     }
+    /** Can this object move beyond the game window? */
     set restrictToScreen(bool){
         this.restrictToScreen = bool;
         return this._restrictToScreen;
