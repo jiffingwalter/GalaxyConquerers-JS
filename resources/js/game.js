@@ -32,29 +32,30 @@ function initalizeGame(){
     function createControlsEventListener(){
         document.addEventListener("keydown", event=>{
             /* Player directional controls */
-            if (event.key.startsWith("Arrow") && globals.gameState == "running"){
+            if (globals.gameState == "running"){
                 event.preventDefault();
                 if(player.allowHorizontalMovement){
-                    switch(event.key){
-                        case "ArrowLeft":
+                    switch(event.key.toLowerCase()){
+                        case "a":
                             player.x -= player.speed;
                             break;
-                        case "ArrowRight":
+                        case "d":
                             player.x += player.speed;
                             break;
                     }
                 }
                 if(player.allowVerticalMovement){
-                    switch(event.key){
-                        case "ArrowUp":
+                    switch(event.key.toLowerCase()){
+                        case "w":
                             player.y -= player.speed;
                             break;
-                        case "ArrowDown":
+                        case "s":
                             player.y += player.speed;
                             break;
                     }
                 }
             }
+            //console.log(event);
             /* Menu controls */
             // menu controls go here!
         });
