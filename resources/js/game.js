@@ -36,20 +36,20 @@ function initalizeGame(){
                 event.preventDefault();
                 if(player.allowHorizontalMovement){
                     switch(event.key.toLowerCase()){
-                        case globals.controls.MOVE_UP:
+                        case globals.controls.MOVE_LEFT:
                             player.x -= player.speed;
                             break;
-                        case globals.controls.MOVE_DOWN:
+                        case globals.controls.MOVE_RIGHT:
                             player.x += player.speed;
                             break;
                     }
                 }
                 if(player.allowVerticalMovement){
                     switch(event.key.toLowerCase()){
-                        case globals.controls.MOVE_LEFT:
+                        case globals.controls.MOVE_UP:
                             player.y -= player.speed;
                             break;
-                        case globals.controls.MOVE_RIGHT:
+                        case globals.controls.MOVE_DOWN:
                             player.y += player.speed;
                             break;
                     }

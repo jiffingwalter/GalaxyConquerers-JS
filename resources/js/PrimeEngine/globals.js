@@ -4,8 +4,8 @@ export let globals ={
     'gameState': null,
     controls:{
         MOVE_UP:'w',
-        MOVE_DOWN:'a',
-        MOVE_LEFT:'s',
+        MOVE_DOWN:'s',
+        MOVE_LEFT:'a',
         MOVE_RIGHT:'d',
         SHOOT:'space'
     }
