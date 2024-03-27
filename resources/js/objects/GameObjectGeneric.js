@@ -3,13 +3,13 @@ import { PrimeEngine as pe } from "../PrimeEngine/PrimeEngine.js";
 // Topmost game object
 export class GameObjectGeneric{
     // technical values
-    _id = String;
-    _sprite = String;
-    _element = HTMLObjectElement;
-    _classes = Array;
-    _origin = Number;
-    _x = Number;
-    _y = Number;
+    _id = String; // Unique identifier for the object
+    _sprite = String; // Sprite name of object (optional)
+    _element = HTMLObjectElement; // HTML element of the object
+    _offset = Object; // Offset origin of the object's HTML element
+    _classes = Array; // CSS classes to be applied (optional)
+    _x = Number; // width positon
+    _y = Number; // height position
     _r = Number; // rotation
 
     // attribute values
@@ -19,9 +19,14 @@ export class GameObjectGeneric{
     _allowVerticalMovement = Boolean;
     _allowHorizontalMovement = Boolean;
     _restrictToScreen = Boolean;
+    _originIsCentered = Boolean;
 
     constructor(){
         this._id = typeof(this) + this.genID();
+        this._offset = {'x':0,'y':0};
+        let newElement = document.createElement('object');
+        newElement.id = this.id;
+        this.bindElement(newElement);
     }
 
     // GENERIC ---------------------------------------------------------------------------------------
@@ -75,26 +80,46 @@ export class GameObjectGeneric{
     get x(){
         return this._x;
     }
-    set x(x){
+    set x(xIn){
+        xIn += this._offset.x; // adjust coordinate for offset
         // if restrictToScreen flag is true and the new coordinate is outside the window, return and do not allow the coordinate update
-        if (this.restrictToScreen && pe.isCoordinateOffScreen(x,this.element.clientWidth)){
+        if (this.restrictToScreen && pe.isCoordinateOffScreen(x,this._element.clientWidth)){
             return false;
         }
-        this.element.style.left = `${x}px`;
-        this._x = x;
+        this._element.style.left = `${xIn}px`;
+        this._x = xIn;
         return true;
     }
     get y(){
         return this._y;
     }
-    set y(y){
+    set y(yIn){
+        yIn += this._offset.y; // adjust coordinate for offset
         // if restrictToScreen flag is true and the new coordinate is outside the window, return and do not allow the coordinate update
         if (this.restrictToScreen && pe.isCoordinateOffScreen(y,this.element.clientHeight)){
             return false;
         }
-        this.element.style.top = `${y}px`;
-        this._y = y;
+        this._element.style.top = `${yIn}px`;
+        this._y = yIn;
         return true;
+    }
+    /**
+     * Sets the object's offset (or origin). If nothing provided and originIsCentered is true, origin is automatically set to center
+     * @param {Object} coords New coordinates in JS format
+     * @returns {Object} Newly set offset coordinates
+     */
+    set offset(coords){
+        if (this._originIsCentered){
+            this._offset.x = (this._element.clientWidth / 2) * -1;
+            this._offset.y = (this._element.clientHeight / 2) * -1;
+        } else {
+            this._offset.x = coords.x * -1;
+            this._offset.y = coords.y * -1;
+        }
+        return this._offset;
+    }
+    get offset(){
+        return this._offset;
     }
 
     // DEBUG ------------------------------------------------------------------------------------------------
@@ -131,7 +156,17 @@ export class GameObjectGeneric{
     get restrictToScreen(){
         return this._restrictToScreen;
     }
-
+    /** Is this object's origin in the center? Sets to center if true */
+    set originIsCentered(bool){
+        this._originIsCentered = bool;
+        if (bool == true){
+            this._offset = null; // force origin update
+        }
+        return this.originIsCentered;
+    }
+    get originIsCentered(){
+        return this._restrictToScreen;
+    }
     // FUNCTIONS -------------------------------------------------------------------------------------------------
     // general functions area - likely flag implementations
     

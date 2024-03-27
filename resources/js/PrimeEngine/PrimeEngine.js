@@ -40,14 +40,11 @@ export class PrimeEngineCore{
      * @return Newly created object
      */
     createObject(object,x,y){
-        let newElement = document.createElement('object');
-        newElement.id = object.id;
-        object.bindElement(newElement);
-        this.gameWindow.append(newElement);
         object.x = x;
         object.y = y;
         object.r = 0;
-
+        
+        this.gameWindow.append(object.element);
         ObjectController.add(object);
         
         return object;

@@ -7,6 +7,7 @@ export class Player extends ObjectNonstatic{
         this.speed = 50;
         this.allowHorizontalMovement = true;
         this.allowVerticalMovement = false;
+        this.originIsCentered = true;
     }
     
     // ATTRIBUTES -------------------------------------------------------------------------------------
