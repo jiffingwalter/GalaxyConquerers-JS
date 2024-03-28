@@ -23,7 +23,7 @@ export class GameObjectGeneric{
 
     constructor(){
         this._id = typeof(this) + this.genID();
-        this._offset = {'x':0,'y':0};
+        this._offset = {x:0,y:0};
         let newElement = document.createElement('object');
         newElement.id = this.id;
         this.bindElement(newElement);
@@ -80,42 +80,37 @@ export class GameObjectGeneric{
     get x(){
         return this._x;
     }
-    set x(xIn){
-        xIn += this._offset.x; // adjust coordinate for offset
+    set x(x){
+        x += this._offset.x; // adjust coordinate for offset
         // if restrictToScreen flag is true and the new coordinate is outside the window, return and do not allow the coordinate update
         if (this.restrictToScreen && pe.isCoordinateOffScreen(x,this._element.clientWidth)){
             return false;
         }
-        this._element.style.left = `${xIn}px`;
-        this._x = xIn;
+        this._element.style.left = `${x}px`;
+        this._x = x;
         return true;
     }
     get y(){
         return this._y;
     }
-    set y(yIn){
-        yIn += this._offset.y; // adjust coordinate for offset
+    set y(y){
+        y += this._offset.y; // adjust coordinate for offset
         // if restrictToScreen flag is true and the new coordinate is outside the window, return and do not allow the coordinate update
         if (this.restrictToScreen && pe.isCoordinateOffScreen(y,this.element.clientHeight)){
             return false;
         }
-        this._element.style.top = `${yIn}px`;
-        this._y = yIn;
+        this._element.style.top = `${y}px`;
+        this._y = y;
         return true;
     }
     /**
-     * Sets the object's offset (or origin). If nothing provided and originIsCentered is true, origin is automatically set to center
-     * @param {Object} coords New coordinates in JS format
+     * Sets the object's offset (or origin). If nothing provided and originIsCentered is true, origin is automatically set to center.
+     * This is a normal function and not a "set" statement since JavaScript is goofy ahh and you can't pass an object with "set"
      * @returns {Object} Newly set offset coordinates
      */
-    set offset(coords){
-        if (this._originIsCentered){
-            this._offset.x = (this._element.clientWidth / 2) * -1;
-            this._offset.y = (this._element.clientHeight / 2) * -1;
-        } else {
-            this._offset.x = coords.x * -1;
-            this._offset.y = coords.y * -1;
-        }
+    setOffset(coords){
+        this._offset.x = coords.x;
+        this._offset.y = coords.y;
         return this._offset;
     }
     get offset(){
@@ -156,11 +151,14 @@ export class GameObjectGeneric{
     get restrictToScreen(){
         return this._restrictToScreen;
     }
-    /** Is this object's origin in the center? Sets to center if true */
+    /** Is this object's origin in the center? Update offset to center if true */
     set originIsCentered(bool){
         this._originIsCentered = bool;
         if (bool == true){
-            this._offset = null; // force origin update
+            this.setOffset({
+                x: (this._element.clientWidth / 2) * -1,
+                y: (this._element.clientHeight / 2) * -1
+            });
         }
         return this.originIsCentered;
     }
