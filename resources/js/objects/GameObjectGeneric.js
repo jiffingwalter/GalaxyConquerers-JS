@@ -8,6 +8,15 @@ export class GameObjectGeneric{
     _element = HTMLObjectElement; // HTML element of the object
     _offset = Object; // Offset origin of the object's HTML element
     _classes = Array; // CSS classes to be applied (optional)
+    _styles = { // default CSS styles that should be applied
+        position: 'relative',
+        background: 'white',
+        width: '50px',
+        height: '50px',
+        top: '0px',
+        left: '0px',
+        transition: 'top 0.1s, left 0.1s'
+    };
     _x = Number; // width positon
     _y = Number; // height position
     _r = Number; // rotation
@@ -27,6 +36,7 @@ export class GameObjectGeneric{
         let newElement = document.createElement('object');
         newElement.id = this.id;
         this.bindElement(newElement);
+        this.addStyleList(this._styles);
     }
 
     // GENERIC ---------------------------------------------------------------------------------------
@@ -75,7 +85,30 @@ export class GameObjectGeneric{
             'r':this._r
         };
     }
-
+    // CSS styling
+    /**
+     * Add or set a single CSS style rule to the object's HTML element
+     * @param {String} style CSS style rule name 
+     * @param {String} rule input for style rule value
+     * @returns boolean of success
+     */
+    setStyle(rule,value){
+        this.element.style[rule] = value;
+        return true;
+    }
+    /**
+     * Apply a list of CSS styles to the object's HTML element
+     * @param {*} styles JS object with the syntax {'rule name':'rule value'}
+     * @returns boolean of success
+     */
+    addStyleList(styles){
+        for (const [rule, value] of Object.entries(styles)){
+            console.log(`applied styling ${rule} : ${value}`);
+            this.element.style[rule] = value;
+        }
+        return true;
+    }
+    
     // POSITIONING AND MOVEMENT ----------------------------------------------------------------------------
     get x(){
         return this._x;
