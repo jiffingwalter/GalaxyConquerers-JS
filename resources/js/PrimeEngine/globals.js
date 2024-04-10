@@ -1,7 +1,10 @@
-// global variables and functions
+/** Global environment variables */
 export let globals ={
-    'debug': true,
-    'gameState': null,
+    debug:{
+        generic: true,
+        input: true
+    },
+    gameState: null,
     controls:{
         MOVE_UP:'w',
         MOVE_DOWN:'s',

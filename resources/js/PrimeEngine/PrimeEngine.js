@@ -6,30 +6,6 @@ import { ObjectController } from "./controllers/ObjectController.js";
 export class PrimeEngineCore{
     gameWindow = GameWindowController.getWindowNode();
 
-    // DEBUG ---------------------------------------------------------------------------------------------------------------------
-    debug = {
-        /**
-         * Takes any input, checks if debug is currently enabled and prints contents to console if so
-         * @param {*} input 
-         */
-        print(input){
-            if (globals.debug){
-                console.log('DEBUG: ' + input);
-            }
-        },
-        /** Prints a dump of all of an object's keys and values to the debug console */
-        dumpObject(object){
-            if (globals.debug){
-                let objectKeys = Object.keys(object);
-                let objectValues = Object.values(object);
-    
-                objectKeys.map((element,index)=>{
-                    this.print(`${element} = ${objectValues[index]}`);
-                });
-            }
-        }
-    }
-
     // OBJECT HANDLING --------------------------------------------------------------------------------------------------------------
     /** 
      * Creates a specified game object in the game world at the given x and y coordinates.
@@ -83,6 +59,30 @@ export class PrimeEngineCore{
         }
         // is the coordinate outside the game window width and/or height?
         return (coord < 0 || coord + gridBuffer > screen.width) && (coord < 0 || coord + gridBuffer > screen.height);
+    }
+    
+    // DEBUG ---------------------------------------------------------------------------------------------------------------------
+    debug = {
+        /**
+         * Default debug print. Takes any input, checks if debug is currently enabled and prints contents to console if so
+         * @param {*} input 
+         */
+        print(input,type = 'generic'){
+            if (globals.debug[type]){
+                console.log(`DEBUG[${type.toUpperCase()}]: ${input}`);
+            }
+        },
+        /** Prints a dump of all of an object's keys and values to the debug console */
+        dumpObject(object){
+            if (globals.debug){
+                let objectKeys = Object.keys(object);
+                let objectValues = Object.values(object);
+    
+                objectKeys.map((element,index)=>{
+                    this.print(`${element} = ${objectValues[index]}`);
+                });
+            }
+        },
     }
 }
 // exports

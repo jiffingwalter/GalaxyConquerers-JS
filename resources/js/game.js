@@ -54,6 +54,8 @@ function initalizeGame(){
                             break;
                     }
                 }
+                // debug
+                pe.debug.print(`captured: ${event.key}`,'input');
             }
             //console.log(event);
             /* Menu controls */

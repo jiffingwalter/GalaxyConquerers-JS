@@ -8,11 +8,11 @@ export class GameObjectGeneric{
     _element = HTMLObjectElement; // HTML element of the object
     _offset = Object; // Offset origin of the object's HTML element
     _classes = Array; // CSS classes to be applied (optional)
+    _width = Number; // Object's CSS width
+    _height = Number; // Object's CSS height
     _styles = { // default CSS styles that should be applied
         position: 'relative',
         background: 'white',
-        width: '50px',
-        height: '50px',
         top: '0px',
         left: '0px',
         transition: 'top 0.1s, left 0.1s'
@@ -94,7 +94,7 @@ export class GameObjectGeneric{
      */
     setStyle(rule,value){
         this.element.style[rule] = value;
-        return true;
+        return this.element.style[rule];
     }
     /**
      * Apply a list of CSS styles to the object's HTML element
@@ -103,10 +103,26 @@ export class GameObjectGeneric{
      */
     addStyleList(styles){
         for (const [rule, value] of Object.entries(styles)){
-            console.log(`applied styling ${rule} : ${value}`);
+            //pe.debug.print(`applied styling ${rule} : ${value}`);
             this.element.style[rule] = value;
         }
         return true;
+    }
+    get width(){
+        return this._width;
+    }
+    set width(px){
+        pe.debug.print(this.setStyle("width",`${px}px`));
+        this._width = px;
+        return this._width;
+    }
+    get height(){
+        return this._height;
+    }
+    set height(px){
+        pe.debug.print(this.setStyle("height",`${px}px`));
+        this._height = px;
+        return this._height;
     }
     
     // POSITIONING AND MOVEMENT ----------------------------------------------------------------------------
@@ -189,9 +205,11 @@ export class GameObjectGeneric{
         this._originIsCentered = bool;
         if (bool == true){
             this.setOffset({
-                x: (this._element.clientWidth / 2) * -1,
-                y: (this._element.clientHeight / 2) * -1
+                x: (this._element.style.width / 2) * -1,
+                y: (this._element.style.height / 2) * -1
             });
+            pe.debug.print("x:" + (this._element.style.width));
+            pe.debug.print("y:" + (this._element.style.height));
         }
         return this.originIsCentered;
     }
