@@ -25,7 +25,7 @@ export class ObjectControllerClass{
         return true;
     }
     // Collection of objects that are expected to be used - saves from having to do tons of imports in engine for objects and keeps them all in one spot
-    ObjectPallet = {
+    ObjectPalette = {
         generic:{
             GameObjectGeneric:GameObjectGeneric,
             Enemy:Enemy,

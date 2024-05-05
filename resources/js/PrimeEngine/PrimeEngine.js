@@ -6,6 +6,76 @@ import { ObjectController } from "./controllers/ObjectController.js";
 export class PrimeEngineCore{
     gameWindow = GameWindowController.getWindowNode();
 
+    // CORE -----------------------------------------------------------------------------------------------------------------------
+    /** Initialize game  */
+    initalizeGame(){
+        this.debug.print('initalizing game...');
+        globals.gameState = "running";
+    
+        // create player object and initalize controls
+        let player = createPlayer(400,800);
+        //pe.debug.dumpObject(player);
+        createControlsEventListener();
+    }
+    /** Begin tick manager for updating game window and events */
+    runTickManager(){
+        let ticks = 0;
+        let frames = 0;
+        let delta = 0;
+
+        while(globals.gameState == "running"){
+            
+        }
+
+        function tick(){
+            ticks++;
+        }
+    }
+    /**
+     * Creates a new player object
+     * @returns newly created player object
+     */
+    createPlayer(x,y){
+        let newPlayer = pe.createObject(new palette.generic.Player,x,y);
+        return newPlayer;
+    }
+    
+    /**
+     * Creates and controls player controls/interaction
+     */
+    createControlsEventListener(){
+        document.addEventListener("keydown", event=>{
+            /* Player directional controls */
+            if (globals.gameState == "running"){
+                event.preventDefault();
+                if(player.allowHorizontalMovement){
+                    switch(event.key.toLowerCase()){
+                        case globals.controls.MOVE_LEFT:
+                            player.x -= player.speed;
+                            break;
+                        case globals.controls.MOVE_RIGHT:
+                            player.x += player.speed;
+                            break;
+                    }
+                }
+                if(player.allowVerticalMovement){
+                    switch(event.key.toLowerCase()){
+                        case globals.controls.MOVE_UP:
+                            player.y -= player.speed;
+                            break;
+                        case globals.controls.MOVE_DOWN:
+                            player.y += player.speed;
+                            break;
+                    }
+                }
+                // debug
+                pe.debug.print(`captured: ${event.key}`,'input');
+            }
+            //console.log(event);
+            /* Menu controls */
+            // menu controls go here!
+        });
+    }
     // OBJECT HANDLING --------------------------------------------------------------------------------------------------------------
     /** 
      * Creates a specified game object in the game world at the given x and y coordinates.
@@ -85,6 +155,8 @@ export class PrimeEngineCore{
         },
     }
 }
+
 // exports
 export let PrimeEngine = new PrimeEngineCore();
-export let ObjectPallet = ObjectController.ObjectPallet;
+export let ObjectPalette = ObjectController.ObjectPalette;
+export let globals = globals;
