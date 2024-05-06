@@ -72,6 +72,7 @@ export class PrimeEngineCore{
             // menu controls go here!
         });
     }
+    
     // OBJECT HANDLING --------------------------------------------------------------------------------------------------------------
     /** 
      * Creates a specified game object in the game world at the given x and y coordinates.

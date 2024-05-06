@@ -10,8 +10,8 @@ function main(){
 
     // Start the game
     globals.gameState = "running";
-    pe.createPlayer(400,800);
-    //pe.debug.dumpObject(pe.player);
+    pe.createPlayer((pe.gameWindow.clientWidth / 2) - 25, pe.gameWindow.clientHeight - 50);
+    //pe.debug.dumpObject(pe.playerObj);
     pe.createControlsEventListener();
 }
 main();
