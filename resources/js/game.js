@@ -1,11 +1,17 @@
-import { PrimeEngine as pe, ObjectPalette as palette, globals } from "./PrimeEngine/PrimeEngine.js";
+import {
+    PrimeEngine as pe,
+    ObjectPalette as palette,
+    globalsObj as globals
+} from "./PrimeEngine/PrimeEngine.js";
 
-// Parent game script
-// Will handle game initilization, game events, score related functions
-
+/** Main game engine function calls and event script - will eventually be where score, object creation, and other similar things happen */
 function main(){
-    pe.initalizeGame();
-    pe.runTickManager();
-}
+    pe.initalize();
 
-/** Initialization of the game */
+    // Start the game
+    globals.gameState = "running";
+    pe.createPlayer(400,800);
+    //pe.debug.dumpObject(pe.player);
+    pe.createControlsEventListener();
+}
+main();

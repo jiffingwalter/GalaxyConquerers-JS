@@ -5,17 +5,13 @@ import { ObjectController } from "./controllers/ObjectController.js";
 // core Primordial Engine functionality
 export class PrimeEngineCore{
     gameWindow = GameWindowController.getWindowNode();
+    playerObj = null;
 
     // CORE -----------------------------------------------------------------------------------------------------------------------
-    /** Initialize game  */
-    initalizeGame(){
+    /** Initialize game engine functionalities  */
+    initalize(){
         this.debug.print('initalizing game...');
-        globals.gameState = "running";
-    
-        // create player object and initalize controls
-        let player = createPlayer(400,800);
-        //pe.debug.dumpObject(player);
-        createControlsEventListener();
+        this.runTickManager();
     }
     /** Begin tick manager for updating game window and events */
     runTickManager(){
@@ -24,7 +20,7 @@ export class PrimeEngineCore{
         let delta = 0;
 
         while(globals.gameState == "running"){
-            
+            break; // stop infinite loop
         }
 
         function tick(){
@@ -32,12 +28,12 @@ export class PrimeEngineCore{
         }
     }
     /**
-     * Creates a new player object
+     * Spawns a player at given coordinates, if provided
      * @returns newly created player object
      */
-    createPlayer(x,y){
-        let newPlayer = pe.createObject(new palette.generic.Player,x,y);
-        return newPlayer;
+    createPlayer(x = 0,y = 0){
+        this.playerObj = this.createObject(new ObjectPalette.generic.Player,x,y);
+        return this.playerObj;
     }
     
     /**
@@ -48,28 +44,28 @@ export class PrimeEngineCore{
             /* Player directional controls */
             if (globals.gameState == "running"){
                 event.preventDefault();
-                if(player.allowHorizontalMovement){
+                if(this.playerObj.allowHorizontalMovement){
                     switch(event.key.toLowerCase()){
                         case globals.controls.MOVE_LEFT:
-                            player.x -= player.speed;
+                            this.playerObj.x -= this.playerObj.speed;
                             break;
                         case globals.controls.MOVE_RIGHT:
-                            player.x += player.speed;
+                            this.playerObj.x += this.playerObj.speed;
                             break;
                     }
                 }
-                if(player.allowVerticalMovement){
+                if(this.playerObj.allowVerticalMovement){
                     switch(event.key.toLowerCase()){
                         case globals.controls.MOVE_UP:
-                            player.y -= player.speed;
+                            this.playerObj.y -= this.playerObj.speed;
                             break;
                         case globals.controls.MOVE_DOWN:
-                            player.y += player.speed;
+                            this.playerObj.y += this.playerObj.speed;
                             break;
                     }
                 }
                 // debug
-                pe.debug.print(`captured: ${event.key}`,'input');
+                this.debug.print(`captured: ${event.key}`,'input');
             }
             //console.log(event);
             /* Menu controls */
@@ -159,4 +155,4 @@ export class PrimeEngineCore{
 // exports
 export let PrimeEngine = new PrimeEngineCore();
 export let ObjectPalette = ObjectController.ObjectPalette;
-export let globals = globals;
+export let globalsObj = globals;
