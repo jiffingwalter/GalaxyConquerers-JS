@@ -3,16 +3,23 @@ export let globals ={
     /** Debug values */
     debug:{
         generic: true,
-        input: true
+        engine: true,
+        input: false,
     },
 
     /** Current game state value */
-    gameState: null,
+    gameState: {
+        running: false,
+        ticks: 0
+    },
 
     /** Game tick speed */
-    gameSpeed: 1,
+    gameSpeed: 60,
 
-    /** Player controls variables */
+    /** Get current time in milliseconds */
+    time: ()=>{return performance.now()},
+
+    /** Player controls bindings */
     controls:{
         MOVE_UP:'w',
         MOVE_DOWN:'s',
