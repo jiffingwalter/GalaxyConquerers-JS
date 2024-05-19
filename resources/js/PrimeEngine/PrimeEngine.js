@@ -31,16 +31,16 @@ export class PrimeEngineCore{
 
             //update gamestate...
 
+
             //update render...
+
 
             //wait to request next frame...
             setTimeout(()=>{
                 getTick();
-            }, 1000 / globals.gameSpeed);
+            }, 1000 / globals.gameState.gameSpeed);
         }
     }
-    
-    
     
     // OBJECT HANDLING --------------------------------------------------------------------------------------------------------------
     /** 

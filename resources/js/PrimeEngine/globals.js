@@ -7,14 +7,20 @@ export let globals ={
         input: false,
     },
 
-    /** Current game state value */
+    /** Current game state variables  */
     gameState: {
+        /** TECHNICAL */
         running: false,
-        ticks: 0
-    },
+        gameSpeed: 60,
+        ticks: 0,
 
-    /** Game tick speed */
-    gameSpeed: 60,
+        /** OTHER */
+        playerPos:{
+            x:0,
+            y:0,
+            r:0
+        }
+    },
 
     /** Get current time in milliseconds */
     time: ()=>{return performance.now()},
