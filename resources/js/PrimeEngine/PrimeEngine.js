@@ -135,13 +135,19 @@ export class PrimeEngineCore{
         });
     }
     // UTILITY -------------------------------------------------------------------------------------
-    /** Sleep for a specified amount of time */
+    /** Do absolutely nothing (filler for promises) */
+    null(){
+        return null;
+    }
+    /** Sleep for a specified amount of time - AWAIT ONLY */
     sleep(duration){
-        return new Promise((resolve) => setTimeout(resolve, duration));
+        return new Promise((resolve) => {
+            setTimeout(resolve, duration);
+        });
     }
     /** Sleep until a condition is tested as true - CURRENTLY DOESN'T CATCH CONDITION. WILL RUN 4EVER! need to research how this will work in a non-angular setting
      * @param condition condition to test for
-     * @param testSpeed how long to wait inbetween the each test for the condition
+     * @param testSpeed how long to wait inbetween the each test for the condition. Defaults to 1000 milliseconds
      */
     sleepUntil(condition,testSpeed = 1000){
         let condMet = false;
@@ -149,7 +155,7 @@ export class PrimeEngineCore{
             while (!condMet){
                 if (condition) break;
                 console.log('waiting for condition...');
-                await this.sleep(1000);
+                await this.sleep(testSpeed);
             }
         });
     }
@@ -184,7 +190,6 @@ export class PrimeEngineCore{
                         break;
 
                     case 'object':
-                        log('dumping object')
                         let line = Object.entries(input);
                         line.map((element)=>{
                             log(`${element[0]} : ${element[1]}`);

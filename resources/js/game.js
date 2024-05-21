@@ -11,8 +11,8 @@ async function main(){
     pe.debug.print(pe.playerObj,'player');
     pe.createControlsEventListener();
 
-    let cond = false;
-    setTimeout(()=>{cond == true;console.log('test state has been set to true')},2500);
+    globals.cond = false;
+    setTimeout(()=>{globals.cond == true;console.log('test state has been set to true')},2500);
     //pe.sleepUntil(cond);
 }
 main();

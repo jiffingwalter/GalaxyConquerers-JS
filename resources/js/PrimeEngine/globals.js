@@ -6,6 +6,7 @@ export let globals ={
         generic: true,
         engine: true,
         input: false,
+        player: false,
     },
 
     /** Current game state variables  */
