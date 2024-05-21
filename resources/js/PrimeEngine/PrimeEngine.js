@@ -177,7 +177,7 @@ export class PrimeEngineCore{
          * @param {String} type Category of debug. Defaults to generic if none provided.
          */
         print(input,type = 'generic'){
-            if (globals.debug[type]){
+            if (globals.debug[type] && globals.debug.enabled){
                 switch (typeof input){
                     case 'array':
                         for (let line in input) log(line);

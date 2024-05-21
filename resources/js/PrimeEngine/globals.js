@@ -2,6 +2,7 @@
 export let globals ={
     /** Debug values */
     debug:{
+        enabled: true,
         generic: true,
         engine: true,
         input: false,
