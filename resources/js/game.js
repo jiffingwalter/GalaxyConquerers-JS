@@ -12,7 +12,7 @@ async function main(){
     pe.createControlsEventListener();
 
     let cond = false;
-    setTimeout(()=>{cond == true},1000);
+    setTimeout(()=>{cond == true;console.log('test state has been set to true')},2500);
     //pe.sleepUntil(cond);
 }
 main();
