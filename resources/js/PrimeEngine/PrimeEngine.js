@@ -9,15 +9,15 @@ export class PrimeEngineCore{
 
     // CORE -----------------------------------------------------------------------------------------------------------------------
     initalizeEngine(){
-        return new Promise(()=>{
-            this.debug.print('initalizing...','engine');
-            Renderer.initialize();
-            this.gameWindow = Renderer.getWindowNode();
-            globals.gameState.running = true;
-            
-            //this.gameLoopController();
-            this.debug.print('initialized successfully!','engine');
-        });
+        this.debug.print('initalizing...','engine');
+        Renderer.initialize();
+        this.gameWindow = Renderer.getWindowNode();
+        globals.gameState.status = "running";
+        
+        //this.gameLoopController();
+
+        globals.engine.running = true;
+        this.debug.print('initialized successfully!','engine');
     }
     gameLoopController(){
         this.debug.print('game loop has begun...','engine');
@@ -104,7 +104,7 @@ export class PrimeEngineCore{
     createControlsEventListener(){
         document.addEventListener("keydown", event=>{
             /* Player directional controls */
-            if (globals.gameState.running){
+            if (globals.gameState.status == 'running'){
                 event.preventDefault();
                 if(this.playerObj.allowHorizontalMovement){
                     switch(event.key.toLowerCase()){
@@ -145,19 +145,26 @@ export class PrimeEngineCore{
             setTimeout(resolve, duration);
         });
     }
-    /** Sleep until a condition is tested as true - CURRENTLY DOESN'T CATCH CONDITION. WILL RUN 4EVER! need to research how this will work in a non-angular setting
-     * @param condition condition to test for
+    /** Sleep until a condition is tested as true
+     * @param condition string name of condition to test for, must exist in globals.cond object - TODO: do this another way
      * @param testSpeed how long to wait inbetween the each test for the condition. Defaults to 1000 milliseconds
+     * @param object string name of which globals object to test in. 'cond' by default -  TODO: do this another way
      */
-    sleepUntil(condition,testSpeed = 1000){
-        let condMet = false;
-        return new Promise(async () => {
-            while (!condMet){
-                if (condition) break;
+    sleepUntil(condition,testSpeed = 1000,object = 'cond'){
+        return new Promise(async (resolve) => {
+            if (globals[object][condition] == undefined) resolve();
+            while (globals[object][condition] == false){
                 console.log('waiting for condition...');
                 await this.sleep(testSpeed);
             }
+            resolve();
         });
+    }
+    /** Creates a condition object from an input */
+    cond(condtion){
+        // take condition statement
+        // assign it to the cond globals...
+        // return an object with newly created path to globals object {condition name, globals category}
     }
     /**
      * Tests if a coordinate is outside the game window

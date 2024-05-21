@@ -9,10 +9,15 @@ export let globals ={
         player: false,
     },
 
+    /** Engine variables */
+    engine:{
+        running: false,
+    },
+
     /** Current game state variables  */
     gameState: {
         /** TECHNICAL */
-        running: false,
+        status: null,
         gameSpeed: 60,
         ticks: 0,
 
@@ -34,5 +39,10 @@ export let globals ={
         MOVE_LEFT:'a',
         MOVE_RIGHT:'d',
         SHOOT:'space'
+    },
+
+    /** Object for temporary storage of conditions so they may be referenced cross-script */
+    cond: {
+        test: false,
     }
 }
