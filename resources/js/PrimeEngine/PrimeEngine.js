@@ -136,7 +136,7 @@ export class PrimeEngineCore{
     sleep(duration){
         return new Promise((resolve) => setTimeout(resolve, duration));
     }
-    /** Sleep until a condition is tested as true
+    /** Sleep until a condition is tested as true - CURRENTLY DOESN'T CATCH CONDITION. WILL RUN 4EVER! need to research how this will work in a non-angular setting
      * @param condition condition to test for
      * @param testSpeed how long to wait inbetween the each test for the condition
      */
