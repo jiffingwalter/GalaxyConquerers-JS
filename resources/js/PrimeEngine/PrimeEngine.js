@@ -22,6 +22,9 @@ export class PrimeEngineCore{
     gameLoopController(){
         this.debug.print('game loop has begun...','engine');
         let lastTime = 0;
+
+        // TODO: experiment with making this async and await to see if they can be wrapped in a loop for state control
+
         getTick();
 
         function getTick(){
