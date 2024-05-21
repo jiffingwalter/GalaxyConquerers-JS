@@ -1,18 +1,23 @@
 import { globals } from "./globals.js";
-import { GameWindowController } from "./controllers/GameWindowController.js";
 import { ObjectController } from "./controllers/ObjectController.js";
+import { Renderer } from "./controllers/RendererClass.js";
 
 // core Primordial Engine functionality
 export class PrimeEngineCore{
-    gameWindow = GameWindowController.getWindowNode();
+    gameWindow = Element;
     playerObj = null;
 
     // CORE -----------------------------------------------------------------------------------------------------------------------
     initalizeEngine(){
-        this.debug.print('initalizing...');
-        globals.gameState.running = true;
-        
-        this.gameLoopController();
+        return new Promise(()=>{
+            this.debug.print('initalizing...','engine');
+            Renderer.initialize();
+            this.gameWindow = Renderer.getWindowNode();
+            globals.gameState.running = true;
+            
+            //this.gameLoopController();
+            this.debug.print('initialized successfully!','engine');
+        });
     }
     gameLoopController(){
         this.debug.print('game loop has begun...','engine');
@@ -33,7 +38,7 @@ export class PrimeEngineCore{
 
 
             //update render...
-
+            Renderer.updateFrame();
 
             //wait to request next frame...
             setTimeout(()=>{
@@ -127,6 +132,24 @@ export class PrimeEngineCore{
         });
     }
     // UTILITY -------------------------------------------------------------------------------------
+    /** Sleep for a specified amount of time */
+    sleep(duration){
+        return new Promise((resolve) => setTimeout(resolve, duration));
+    }
+    /** Sleep until a condition is tested as true
+     * @param condition condition to test for
+     * @param testSpeed how long to wait inbetween the each test for the condition
+     */
+    sleepUntil(condition,testSpeed = 1000){
+        let condMet = false;
+        return new Promise(async () => {
+            while (!condMet){
+                if (condition) break;
+                console.log('waiting for condition...');
+                await this.sleep(1000);
+            }
+        });
+    }
     /**
      * Tests if a coordinate is outside the game window
      * @param {Number} coord - A coordinate to test
