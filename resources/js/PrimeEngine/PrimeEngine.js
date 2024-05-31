@@ -12,41 +12,54 @@ export class PrimeEngineCore{
         this.debug.print('initalizing...','engine');
         Renderer.initialize();
         this.gameWindow = Renderer.getWindowNode();
+        globals.engine.on = true;
         globals.gameState.status = "running";
         
-        //this.gameLoopController();
+        this.engineLoop();
 
-        globals.engine.running = true;
         this.debug.print('initialized successfully!','engine');
     }
-    gameLoopController(){
+    async engineLoop(){
         this.debug.print('game loop has begun...','engine');
         let lastTime = 0;
+        let tickStep = 0;
+        let loopStep = 0;
 
-        // TODO: experiment with making this async and await to see if they can be wrapped in a loop for state control
-
-        getTick();
+        // Core engine loop
+        while(globals.engine.on){
+            // Game status loop
+            while(globals.gameState.status == "running"){
+                getTick();
+                gameloop();
+                this.debug.print(testEngineSync(),'engine');
+                await this.sleep(1000 / globals.gameState.gameSpeed);
+            }
+            await this.sleep(1000 / globals.gameState.gameSpeed);
+        }
 
         function getTick(){
             lastTime = globals.time();
             globals.gameState.ticks++;
-            gameloop();
+            tickStep++;
         }
 
         function gameloop(){
-            console.log(`frame ${globals.gameState.ticks}`);
             const delta = globals.time() - lastTime;
 
             //update gamestate...
-
+            let GameState = "";
 
             //update render...
             Renderer.updateFrame();
 
-            //wait to request next frame...
-            setTimeout(()=>{
-                getTick();
-            }, 1000 / globals.gameState.gameSpeed);
+            loopStep++;
+        }
+
+        // Ensure main engine functions are keeping in step with each other
+        function testEngineSync(){
+            if (globals.gameState.ticks == loopStep && globals.gameState.ticks == tickStep){
+                return globals.gameState.ticks;
+            } else return `OUT OF SYNC on TICK: ${globals.gameState.ticks} ${tickStep} ${loopStep}`;
         }
     }
     
@@ -139,8 +152,8 @@ export class PrimeEngineCore{
     null(){
         return null;
     }
-    /** Sleep for a specified amount of time - AWAIT ONLY */
-    sleep(duration){
+    /** Sleep for a specified amount of time. Defaults to 1000 ms. - AWAIT ONLY */
+    sleep(duration = 1000){
         return new Promise((resolve) => {
             setTimeout(resolve, duration);
         });

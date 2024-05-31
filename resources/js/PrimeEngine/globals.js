@@ -11,14 +11,14 @@ export let globals ={
 
     /** Engine variables */
     engine:{
-        running: false,
+        on: false,
     },
 
     /** Current game state variables  */
     gameState: {
         /** TECHNICAL */
         status: null,
-        gameSpeed: 60,
+        gameSpeed: 30,
         ticks: 0,
 
         /** OTHER */
