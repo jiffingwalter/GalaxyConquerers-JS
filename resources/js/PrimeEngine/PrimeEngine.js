@@ -20,7 +20,7 @@ export class PrimeEngineCore{
         this.debug.print('initialized successfully!','engine');
     }
     async engineLoop(){
-        this.debug.print('game loop has begun...','engine');
+        this.debug.print('BEGINNING GAME LOOP','engine');
         let lastTime = 0;
         let tickStep = 0;
         let loopStep = 0;
@@ -31,7 +31,7 @@ export class PrimeEngineCore{
             while(globals.gameState.status == "running"){
                 getTick();
                 gameloop();
-                this.debug.print(testEngineSync(),'engine');
+                this.debug.print(testEngineSync(),'tick_sync');
                 await this.sleep(1000 / globals.gameState.gameSpeed);
             }
             await this.sleep(1000 / globals.gameState.gameSpeed);

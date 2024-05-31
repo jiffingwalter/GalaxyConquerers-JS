@@ -5,6 +5,7 @@ export let globals ={
         enabled: true,
         generic: true,
         engine: true,
+        tick_sync: false,
         input: false,
         player: false,
     },
