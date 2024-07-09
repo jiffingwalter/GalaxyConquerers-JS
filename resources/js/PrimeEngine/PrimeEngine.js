@@ -5,7 +5,7 @@ import { Renderer } from "./controllers/RendererClass.js";
 // core Primordial Engine functionality
 export class PrimeEngineCore{
     gameWindow = Element;
-    playerObj = null;
+    player = ObjectController.ObjectPalette.generic.Player;
 
     // CORE -----------------------------------------------------------------------------------------------------------------------
     initalizeEngine(){
@@ -45,21 +45,26 @@ export class PrimeEngineCore{
 
         function gameloop(){
             const delta = globals.time() - lastTime;
-
-            //update gamestate...
-            let GameState = "";
-
-            //update render...
+            updateGameState(delta);
             Renderer.updateFrame();
-
             loopStep++;
         }
 
-        // Ensure main engine functions are keeping in step with each other
+        /* Ensure main engine functions are keeping in step with each other */
         function testEngineSync(){
             if (globals.gameState.ticks == loopStep && globals.gameState.ticks == tickStep){
                 return globals.gameState.ticks;
             } else return `OUT OF SYNC on TICK: ${globals.gameState.ticks} ${tickStep} ${loopStep}`;
+        }
+
+        function updateGameState(){
+            globals.gameState = {
+                playerPos: {
+                    x: PrimeEngine.player.x,
+                    y: PrimeEngine.player.y,
+                    r: PrimeEngine.player.r
+                }
+            }
         }
     }
     
@@ -107,9 +112,10 @@ export class PrimeEngineCore{
      * @returns newly created player object
      */
     createPlayer(x = 0,y = 0){
-        this.playerObj = this.createObject(new ObjectPalette.generic.Player,x,y);
-        return this.playerObj;
+        this.player = this.createObject(new ObjectPalette.generic.Player,x,y);
+        return this.player;
     }
+    
     
     /**
      * Creates and controls player controls/interaction
@@ -119,23 +125,23 @@ export class PrimeEngineCore{
             /* Player directional controls */
             if (globals.gameState.status == 'running'){
                 event.preventDefault();
-                if(this.playerObj.allowHorizontalMovement){
+                if(this.player.allowHorizontalMovement){
                     switch(event.key.toLowerCase()){
                         case globals.controls.MOVE_LEFT:
-                            this.playerObj.x -= this.playerObj.speed;
+                            this.player.x -= this.player.speed;
                             break;
                         case globals.controls.MOVE_RIGHT:
-                            this.playerObj.x += this.playerObj.speed;
+                            this.player.x += this.player.speed;
                             break;
                     }
                 }
-                if(this.playerObj.allowVerticalMovement){
+                if(this.player.allowVerticalMovement){
                     switch(event.key.toLowerCase()){
                         case globals.controls.MOVE_UP:
-                            this.playerObj.y -= this.playerObj.speed;
+                            this.player.y -= this.player.speed;
                             break;
                         case globals.controls.MOVE_DOWN:
-                            this.playerObj.y += this.playerObj.speed;
+                            this.player.y += this.player.speed;
                             break;
                     }
                 }

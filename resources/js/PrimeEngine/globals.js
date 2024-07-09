@@ -17,17 +17,9 @@ export let globals ={
 
     /** Current game state variables  */
     gameState: {
-        /** TECHNICAL */
         status: null,
         gameSpeed: 30,
-        ticks: 0,
-
-        /** OTHER */
-        playerPos:{
-            x:0,
-            y:0,
-            r:0
-        }
+        ticks: 0
     },
 
     /** Get current time in milliseconds */
