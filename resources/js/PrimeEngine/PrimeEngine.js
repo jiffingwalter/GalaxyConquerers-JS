@@ -5,7 +5,7 @@ import { Renderer } from "./controllers/RendererClass.js";
 // core Primordial Engine functionality
 export class PrimeEngineCore{
     gameWindow = Element;
-    player = ObjectController.ObjectPalette.generic.Player;
+    player = globals.gameState.player;
 
     // CORE -----------------------------------------------------------------------------------------------------------------------
     initalizeEngine(){
@@ -39,7 +39,6 @@ export class PrimeEngineCore{
 
         function getTick(){
             lastTime = globals.time();
-            globals.gameState.ticks++;
             tickStep++;
         }
 
@@ -58,13 +57,7 @@ export class PrimeEngineCore{
         }
 
         function updateGameState(){
-            globals.gameState = {
-                playerPos: {
-                    x: PrimeEngine.player.x,
-                    y: PrimeEngine.player.y,
-                    r: PrimeEngine.player.r
-                }
-            }
+            globals.gameState.ticks++;
         }
     }
     
@@ -203,6 +196,9 @@ export class PrimeEngineCore{
     
     // DEBUG ---------------------------------------------------------------------------------------------------------------------
     debug = {
+        initializeDebugMenu:()=>{
+            element = document.createElement('debug');
+        },
         /**
          * Default debug print. Takes any input, checks if debug is currently enabled for the category and prints contents to console if so.
          * @param {*} input 

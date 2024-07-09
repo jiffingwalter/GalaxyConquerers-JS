@@ -19,7 +19,8 @@ export let globals ={
     gameState: {
         status: null,
         gameSpeed: 30,
-        ticks: 0
+        ticks: 0,
+        player: {}
     },
 
     /** Get current time in milliseconds */
