@@ -24,4 +24,10 @@ game-window{
         padding: 1rem;
         margin: 0;
     }
+    a {
+        color: white;
+    }
+    a:hover{
+        color: rgb(255, 217, 0);
+    }
 }
